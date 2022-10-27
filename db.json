@@ -1,0 +1,50 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "category": "phone"
+    },
+    {
+      "id": 2,
+      "category": "avto"
+    }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "iphone 14",
+      "price": 1400,
+      "reminder": 40
+    },
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "iphone 11",
+      "price": 450,
+      "reminder": 10
+    },
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "iphone X",
+      "price": 350,
+      "reminder": 5
+    },
+    {
+      "id": 2,
+      "category_id": 2,
+      "name": "oq fara amerika",
+      "price": 250,
+      "reminder": 100
+    },
+    {
+      "id": 2,
+      "category_id": 2,
+      "name": "oq fara speral",
+      "price": 200,
+      "reminder": 0
+    }
+  ]
+}
