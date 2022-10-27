@@ -2,17 +2,28 @@
   <main>
     <bread-crumb />
     <category @category="category" />
+
     <div class="dvider"></div>
+
     <div class="products-wrapper container">
-      <product
-        v-for="(item, index) in products"
-        :key="index"
-        v-bind="{
-          name: item.name,
-          price: item.price,
-          reminder: item.reminder,
-        }"
-      />
+      <!-- skeleton loader -->
+      <template v-if="loading">
+        <product-skeleton v-for="item in products" :key="item.name" />
+      </template>
+
+      <!-- product cards -->
+      <template v-else>
+        <product
+          v-for="(item, index) in products"
+          :key="index"
+          v-bind="{
+            loading: loading,
+            name: item.name,
+            price: item.price,
+            reminder: item.reminder,
+          }"
+        />
+      </template>
     </div>
   </main>
 </template>
@@ -20,16 +31,18 @@
 <script>
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import Category from "@/components/cards/Category.vue";
+import ProductSkeleton from "@/components/cards/ProductSkeleton.vue";
 import Product from "@/components/cards/Product.vue";
 import { mapState } from "vuex";
 
 export default {
-  components: { BreadCrumb, Category, Product },
+  components: { BreadCrumb, Category, ProductSkeleton, Product },
   data() {
     return {};
   },
   computed: {
     ...mapState({
+      loading: (state) => state.loading,
       products: (state) => state.products,
     }),
   },

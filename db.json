@@ -16,35 +16,44 @@
       "category_id": 1,
       "name": "iphone 14",
       "price": 1400,
-      "reminder": 40
+      "reminder": "40 piece"
     },
     {
       "id": 1,
       "category_id": 1,
       "name": "iphone 11",
       "price": 450,
-      "reminder": 10
+      "reminder": "10 piece"
     },
     {
       "id": 1,
       "category_id": 1,
       "name": "iphone X",
       "price": 350,
-      "reminder": 5
+      "reminder": "5 piece"
     },
     {
       "id": 2,
       "category_id": 2,
       "name": "oq fara amerika",
       "price": 250,
-      "reminder": 100
+      "reminder": "100 piece"
     },
     {
       "id": 2,
       "category_id": 2,
       "name": "oq fara speral",
       "price": 200,
-      "reminder": 0
+      "reminder": "0 piece"
+    }
+  ],
+  "basket": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "iphone 14",
+      "price": 1400,
+      "reminder": "40 piece"
     }
   ]
 }

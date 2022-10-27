@@ -7,6 +7,7 @@ const axiosPlugin = (store) => {
 
 export default createStore({
   state: {
+    loading: false,
     products: [],
   },
   getters: {},
@@ -16,7 +17,9 @@ export default createStore({
     },
   },
   actions: {
-    async fetchAllProducts({ commit }) {
+    async fetchAllProducts({ state, commit }) {
+      state.loading = true;
+      console.log("fetch", state.loading);
       return await new Promise((resolve, reject) => {
         this.$axios
           .get("/products")
@@ -25,11 +28,20 @@ export default createStore({
             console.log(res.data);
             resolve(res.data);
           })
-          .catch((error) => reject(error));
+          .catch((error) => reject(error))
+          .finally(() => {
+            state.loading = false;
+            console.log("finally", state.loading);
+          });
       });
     },
 
-    async fetchProductsByCategory({ commit }, { category_id = undefined }) {
+    async fetchProductsByCategory(
+      { state, commit },
+      { category_id = undefined }
+    ) {
+      state.loading = true;
+
       return await new Promise((resolve, reject) => {
         this.$axios
           .get(`/products?id=${category_id}`)
@@ -38,7 +50,10 @@ export default createStore({
             commit("SET_PRODUCTS", res.data);
             resolve(res.data);
           })
-          .catch((error) => reject(error));
+          .catch((error) => reject(error))
+          .finally(() => {
+            state.loading = false;
+          });
       });
     },
   },

@@ -1,17 +1,22 @@
 <template>
   <button class="product">
     <h3 class="product__name">{{ name }}</h3>
-    <span class="product__price">{{ price }} UZS</span>
+    <span class="product__price">$ {{ formatNum(price) }}</span>
     <span class="product__reminder">{{ reminder }}</span>
   </button>
 </template>
 
 <script>
+import { formatNum } from "@/helpers/main.js";
 export default {
   props: {
+    loading: Boolean,
     name: String,
     price: Number,
     reminder: String,
+  },
+  methods: {
+    formatNum,
   },
 };
 </script>
@@ -26,6 +31,7 @@ export default {
   display: flex;
   flex-direction: column;
   border: none;
+  cursor: pointer;
 
   // product__name
   &__name {
