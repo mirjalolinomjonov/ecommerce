@@ -87,7 +87,7 @@ export default {
 @import "@/assets/styles/_vereables";
 .wrapper {
   background-color: $sky-500;
-  padding: 12px 0;
+  padding: 12px 8px;
 }
 .bread-crumbs {
   display: flex;

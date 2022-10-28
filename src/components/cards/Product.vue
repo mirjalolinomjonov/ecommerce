@@ -1,8 +1,8 @@
 <template>
-  <button class="product">
+  <button @click="addToBasket" class="product">
     <h3 class="product__name">{{ name }}</h3>
     <span class="product__price">$ {{ formatNum(price) }}</span>
-    <span class="product__reminder">{{ reminder }}</span>
+    <span class="product__reminder">{{ reminder }} pcs</span>
   </button>
 </template>
 
@@ -12,11 +12,20 @@ export default {
   props: {
     loading: Boolean,
     name: String,
+    category: String,
     price: Number,
     reminder: String,
   },
   methods: {
     formatNum,
+    addToBasket() {
+      this.$store.dispatch("setProductToBasket", {
+        name: this.name,
+        category: this.category,
+        price: this.price,
+        reminder: this.reminder,
+      });
+    },
   },
 };
 </script>
@@ -32,6 +41,7 @@ export default {
   flex-direction: column;
   border: none;
   cursor: pointer;
+  box-shadow: 0 0 15px 25px rgba($color: #000000, $alpha: 0.02);
 
   // product__name
   &__name {

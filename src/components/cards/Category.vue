@@ -2,9 +2,9 @@
   <div class="container">
     <div class="categories">
       <button
-        @click="category(item.category__id)"
+        @click="category(item.category)"
         class="categories__btn"
-        :class="{ active: isActiveButton === item.category__id }"
+        :class="{ active: isActiveButton === item.category }"
         v-for="(item, index) in categories"
         :key="index"
       >
@@ -22,28 +22,29 @@ export default {
       categories: [
         {
           name: "All",
-          category__id: undefined,
+          category: undefined,
         },
         {
           name: "Phone",
-          category__id: 1,
+          category: 'phone',
         },
         {
           name: "Cars",
-          category__id: 2,
+          category: 'car',
         },
         {
           name: "Computer",
-          category__id: 3,
+          category: 'laptop',
         },
       ],
     };
   },
 
   methods: {
-    category(categoryId) {
-      this.isActiveButton = categoryId;
-      this.$emit("category", categoryId);
+    category(category) {
+      console.log(category);
+      this.isActiveButton = category;
+      this.$emit("category", category);
     },
   },
 };
@@ -55,7 +56,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  padding: 8px 0;
+  padding: 8px;
 
   // categories__btn
   &__btn {

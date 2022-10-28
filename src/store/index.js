@@ -9,13 +9,18 @@ export default createStore({
   state: {
     loading: false,
     products: [],
+    basket: [],
   },
   getters: {},
   mutations: {
     SET_PRODUCTS(state, payload) {
       state.products = payload;
     },
+    SET_PRODUCT_FROM_BASKET(state, payload) {
+      state.basket = payload;
+    },
   },
+
   actions: {
     async fetchAllProducts({ state, commit }) {
       state.loading = true;
@@ -38,13 +43,13 @@ export default createStore({
 
     async fetchProductsByCategory(
       { state, commit },
-      { category_id = undefined }
+      { category = undefined }
     ) {
       state.loading = true;
 
       return await new Promise((resolve, reject) => {
         this.$axios
-          .get(`/products?id=${category_id}`)
+          .get(`/products?category=${category}`)
           .then((res) => {
             console.log(res.data);
             commit("SET_PRODUCTS", res.data);
@@ -54,6 +59,43 @@ export default createStore({
           .finally(() => {
             state.loading = false;
           });
+      });
+    },
+
+    async fetchProductFromBasket({ commit }) {
+      return await new Promise((resolve, reject) => {
+        this.$axios
+          .get("/basket")
+          .then((res) => {
+            commit("SET_PRODUCT_FROM_BASKET", res.data);
+            resolve(res.data);
+          })
+          .catch((error) => reject(error));
+      });
+    },
+
+    async setProductToBasket({ dispatch }, data) {
+      return await new Promise((resolve, reject) => {
+        this.$axios
+          .post("/basket", data)
+          .then((res) => {
+            dispatch("fetchProductFromBasket");
+            resolve(res.data);
+          })
+          .catch((error) => reject(error));
+      });
+    },
+
+    async removeProductFromBasket({ dispatch }, id) {
+      console.log('id=',id);
+      return await new Promise((resolve, reject) => {
+        this.$axios
+          .delete(`/basket/${id}`)
+          .then((res) => {
+            dispatch("fetchProductFromBasket");
+            resolve(res.data);
+          })
+          .catch((error) => reject(error));
       });
     },
   },

@@ -6,54 +6,53 @@
     },
     {
       "id": 2,
-      "category": "avto"
+      "category": "car"
     }
   ],
-
   "products": [
     {
       "id": 1,
-      "category_id": 1,
+      "category": "phone",
       "name": "iphone 14",
       "price": 1400,
-      "reminder": "40 piece"
+      "reminder": 40
     },
     {
-      "id": 1,
-      "category_id": 1,
+      "id": 2,
+      "category": "phone",
       "name": "iphone 11",
       "price": 450,
-      "reminder": "10 piece"
+      "reminder": 15
     },
     {
-      "id": 1,
-      "category_id": 1,
+      "id": 3,
+      "category": "phone",
       "name": "iphone X",
       "price": 350,
-      "reminder": "5 piece"
+      "reminder": 3
     },
     {
-      "id": 2,
-      "category_id": 2,
+      "id": 4,
+      "category": "car",
       "name": "oq fara amerika",
       "price": 250,
-      "reminder": "100 piece"
+      "reminder": 100
     },
     {
-      "id": 2,
-      "category_id": 2,
+      "id": 5,
+      "category": "car",
       "name": "oq fara speral",
       "price": 200,
-      "reminder": "0 piece"
+      "reminder": 0
     }
   ],
   "basket": [
     {
-      "id": 1,
-      "category_id": 1,
-      "name": "iphone 14",
-      "price": 1400,
-      "reminder": "40 piece"
+      "name": "iphone X",
+      "category": "phone",
+      "price": 350,
+      "reminder": 3,
+      "id": 1
     }
   ]
 }

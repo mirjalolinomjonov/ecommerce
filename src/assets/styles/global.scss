@@ -8,12 +8,14 @@
 }
 
 body {
-  background-color: $sky-800;
   font-family: sans-serif;
 }
 
 a {
   text-decoration: none;
+  &:focus-visible{
+    outline: none;
+  }
 }
 ul {
   list-style: none;

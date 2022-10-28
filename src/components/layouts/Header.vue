@@ -1,6 +1,5 @@
 <template>
   <header class="header">
-    <div class="container">
       <router-link class="header__logo" to="/"> ecommerce </router-link>
 
       <!-- navbar -->
@@ -11,7 +10,6 @@
           </li>
         </ul>
       </nav> -->
-    </div>
   </header>
 </template>
 
@@ -22,8 +20,9 @@ export default {};
 <style lang="scss" scoped>
 @import "@/assets/styles/_vereables";
 .header {
-  padding: 15px 0;
+  padding: 15px 8px;
   background-color: $sky-400;
+  text-align: center;
 
   // header__logo
   &__logo {

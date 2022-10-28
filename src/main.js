@@ -6,6 +6,7 @@ import axios from "@/plugins/axios.js";
 import VueAxios from "vue-axios";
 
 import "@/assets/styles/global.scss";
+import "https://kit.fontawesome.com/a076d05399.js";
 
 const app = createApp(App);
 
