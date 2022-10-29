@@ -68,7 +68,7 @@ export default {
 
   methods: {
     category(category) {
-      console.log('category keldi',category);
+      console.log("category keldi", category);
       if (!category) {
         this.$store.dispatch("fetchAllProducts");
       } else {

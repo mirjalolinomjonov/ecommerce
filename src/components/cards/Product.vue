@@ -1,5 +1,9 @@
 <template>
-  <button @click="addToBasket" class="product">
+  <button @click="addToBasket" class="product" :disabled="chekInIsProducts">
+    <i
+      class="fa fa-cart-arrow-down product__cart"
+      :class="{ product__cart_green: chekInIsProducts }"
+    ></i>
     <h3 class="product__name">{{ name }}</h3>
     <span class="product__price">$ {{ formatNum(price) }}</span>
     <span class="product__reminder">{{ reminder }} pcs</span>
@@ -8,6 +12,8 @@
 
 <script>
 import { formatNum } from "@/helpers/main.js";
+import { mapState } from "vuex";
+
 export default {
   props: {
     loading: Boolean,
@@ -16,14 +22,33 @@ export default {
     price: Number,
     reminder: String,
   },
+  data() {
+    return {
+    };
+  },
+  computed: {
+    ...mapState({
+      isProducts: (state) => state.isProducts,
+    }),
+    chekInIsProducts() {
+      return this.isProducts.includes(this.name);
+    },
+  },
+  beforeMount() {
+    this.$store.state.isProducts =
+      JSON.parse(localStorage.getItem("isProducts")) || [];
+  },
   methods: {
     formatNum,
     addToBasket() {
+      this.$store.commit("CHECK_IS_PRODUCT_IN_BASKET", this.name);
+      // this.$store.dispatch('fetchProductFromBasket')
       this.$store.dispatch("setProductToBasket", {
         name: this.name,
         category: this.category,
         price: this.price,
         reminder: this.reminder,
+        count: 1,
       });
     },
   },
@@ -33,6 +58,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/_vereables";
 .product {
+  position: relative;
   width: 100%;
   background-color: #fff;
   padding: 8px;
@@ -42,6 +68,18 @@ export default {
   border: none;
   cursor: pointer;
   box-shadow: 0 0 15px 25px rgba($color: #000000, $alpha: 0.02);
+
+  // product__cart
+  &__cart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
+    color: #d1d5db;
+    &_green {
+      color: #16a34a;
+    }
+  }
 
   // product__name
   &__name {

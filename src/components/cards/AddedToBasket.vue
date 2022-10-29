@@ -17,40 +17,52 @@
         <i :class="item.icon"></i>
       </button>
 
+      <!-- negative, counter and plus buttons -->
       <div class="product__controls">
         <button
-          @click="productNegative"
+          @click="$emit('productNegative')"
           class="product__counter"
-          :disabled="!productResult"
+          :disabled="count <= 1"
         >
           -
         </button>
-        <span class="product__result">{{ productResult }}</span>
-        <button @click="productPlus" class="product__counter">+</button>
+
+        <span class="product__result">{{ count }}</span>
+
+        <button @click="$emit('productPlus')" class="product__counter">
+          +
+        </button>
       </div>
+
+      <!-- remove button -->
       <button
-        @click="removeProduct"
+        @click="removeProduct(index)"
         class="product__button product__button_red"
       >
         <i class="fas fa-trash-alt"></i>
       </button>
     </div>
-    <p class="product__reminder">Warehouse: {{ pcs }} pcs</p>
+    <p class="product__reminder">Warehouse: {{ reminder }} pcs</p>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
+    index: Number,
     id: Number,
+    category: String,
     name: String,
     price: Number,
     sum: Number,
-    pcs: Number,
+    reminder: Number,
+    count: Number,
   },
+  emits: ["productPlus", "productNegative"],
   data() {
     return {
-      productResult: 0,
       productButton: [
         {
           icon: "fas fa-pencil-alt",
@@ -69,18 +81,10 @@ export default {
   },
 
   methods: {
-    productNegative() {
-      console.log("negative");
-      if (this.productResult > 0) {
-        this.productResult -= 1;
-      }
-    },
-    productPlus() {
-      this.productResult += 1;
-      // this.$store.dispatch("setProductToBasket", {}); qoldi
-    },
-    removeProduct() {
+    removeProduct(index) {
+      this.$store.commit("REMOVE_PRODUCT_FROM_BASKET", index);
       this.$store.dispatch("removeProductFromBasket", this.id);
+      this.$store.state.oneProduct = {};
     },
   },
 };
@@ -101,7 +105,8 @@ export default {
     border-bottom: 1px solid #d6d3d180;
     // product-info__item
     &__item {
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
       color: #fff;
     }
   }

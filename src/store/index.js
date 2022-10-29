@@ -9,49 +9,55 @@ export default createStore({
   state: {
     loading: false,
     products: [],
+    oneProduct: {},
     basket: [],
+    isProducts: [],
   },
   getters: {},
   mutations: {
     SET_PRODUCTS(state, payload) {
       state.products = payload;
     },
+    SET_ONE_PRODUCT(state, payload) {
+      state.oneProduct = payload;
+    },
     SET_PRODUCT_FROM_BASKET(state, payload) {
       state.basket = payload;
+    },
+    CHECK_IS_PRODUCT_IN_BASKET(state, payload) {
+      state.isProducts.push(payload);
+      localStorage.setItem("isProducts", JSON.stringify(state.isProducts));
+    },
+    REMOVE_PRODUCT_FROM_BASKET(state, index) {
+      state.isProducts.splice(index, 1);
+      localStorage.setItem("isProducts", JSON.stringify(state.isProducts));
     },
   },
 
   actions: {
     async fetchAllProducts({ state, commit }) {
       state.loading = true;
-      console.log("fetch", state.loading);
       return await new Promise((resolve, reject) => {
         this.$axios
           .get("/products")
           .then((res) => {
             commit("SET_PRODUCTS", res.data);
-            console.log(res.data);
             resolve(res.data);
           })
           .catch((error) => reject(error))
           .finally(() => {
             state.loading = false;
-            console.log("finally", state.loading);
           });
       });
     },
 
-    async fetchProductsByCategory(
-      { state, commit },
-      { category = undefined }
-    ) {
+    async fetchProductsByCategory({ state, commit }, { category = undefined }) {
       state.loading = true;
 
       return await new Promise((resolve, reject) => {
         this.$axios
           .get(`/products?category=${category}`)
           .then((res) => {
-            console.log(res.data);
             commit("SET_PRODUCTS", res.data);
             resolve(res.data);
           })
@@ -87,12 +93,24 @@ export default createStore({
     },
 
     async removeProductFromBasket({ dispatch }, id) {
-      console.log('id=',id);
       return await new Promise((resolve, reject) => {
         this.$axios
           .delete(`/basket/${id}`)
           .then((res) => {
             dispatch("fetchProductFromBasket");
+            resolve(res.data);
+          })
+          .catch((error) => reject(error));
+      });
+    },
+
+    async editOneProduct({ commit }, data) {
+      return await new Promise((resolve, reject) => {
+        this.$axios
+          .put(`/basket/${data.id}`, data)
+          .then((res) => {
+            console.log('edit pro',res.data);
+            commit("SET_ONE_PRODUCT", res.data);
             resolve(res.data);
           })
           .catch((error) => reject(error));

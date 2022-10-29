@@ -22,19 +22,23 @@
         {{ item }}
       </span>
     </div>
-    
+
     <added-to-basket
       v-for="(item, index) in basketData"
       :key="index"
       v-bind="{
+        index: index,
         id: item.id,
+        category: item.category,
         name: item.name,
         price: item.price,
         sum: 77,
-        pcs: item.reminder,
+        reminder: item.reminder,
+        count: item?.count,
       }"
+      @product-plus="productPlus(item)"
+      @product-negative="productNegative(item)"
     />
-    
   </aside>
 </template>
 
@@ -67,6 +71,19 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchProductFromBasket");
+  },
+  methods: {
+    productPlus(data) {
+      data.count += 1;
+      console.log(data.count, "keldi");
+      this.$store.dispatch("editOneProduct", data);
+    },
+    productNegative(data) {
+      if (data?.count > 1) {
+        data.count -= 1;
+      }
+      this.$store.dispatch("editOneProduct", data);
+    },
   },
 };
 </script>

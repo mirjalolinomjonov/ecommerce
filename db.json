@@ -52,7 +52,16 @@
       "category": "phone",
       "price": 350,
       "reminder": 3,
+      "count": 5,
       "id": 1
+    },
+    {
+      "name": "oq fara amerika",
+      "category": "car",
+      "price": 250,
+      "reminder": 100,
+      "count": 2,
+      "id": 2
     }
   ]
 }
