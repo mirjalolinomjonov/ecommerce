@@ -94,6 +94,7 @@ export default {
     onHandler(index) {
       if (index === 1) {
         this.$emit("openDiscountModal");
+        document.body.style.overflow = "hidden";
       }
     },
   },

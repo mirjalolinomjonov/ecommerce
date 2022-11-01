@@ -30,6 +30,7 @@ export default {
   methods: {
     closeModal() {
       this.$emit("closeModal");
+      document.body.style.overflow = "visible";
     },
   },
 };

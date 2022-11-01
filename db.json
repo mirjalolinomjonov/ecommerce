@@ -51,5 +51,15 @@
       "reminder": 0
     }
   ],
-  "basket": []
+  "basket": [
+    {
+      "name": "iphone X",
+      "category": "phone",
+      "price": 350,
+      "discount": 5,
+      "reminder": 3,
+      "count": 1,
+      "id": 1
+    }
+  ]
 }

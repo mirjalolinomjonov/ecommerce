@@ -121,7 +121,6 @@ export default {
     },
 
     openDiscountModal(data) {
-      console.log(data);
       this.isShowDiscountModal = true;
       this.isCurentProductDiscount = true;
       this.curentProduct = data;

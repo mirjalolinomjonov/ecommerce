@@ -124,7 +124,6 @@ export default createStore({
 
     // DELETE REQUEST
     async removeProductFromBasket({ dispatch }, id) {
-      console.log("id keldi", id);
       return await new Promise((resolve, reject) => {
         this.$axios
           .delete(`/basket/${id}`)
@@ -142,7 +141,6 @@ export default createStore({
         this.$axios
           .put(`/basket/${data.id}`, data)
           .then((res) => {
-            console.log("edit pro", res.data);
             commit("SET_ONE_PRODUCT", res.data);
             resolve(res.data);
           })

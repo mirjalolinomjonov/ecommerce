@@ -42,7 +42,6 @@ export default {
 
   methods: {
     category(category) {
-      console.log(category);
       this.isActiveButton = category;
       this.$emit("category", category);
     },

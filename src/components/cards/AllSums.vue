@@ -101,6 +101,7 @@ export default {
       // selected all-discount button
       if (index === 0) {
         this.$emit("openDiscountModal");
+        document.body.style.overflow = "hidden";
 
         // selected clear button
       } else if (index === 3) {
