@@ -26,15 +26,15 @@ export default {
         },
         {
           name: "Phone",
-          category: 'phone',
+          category: "phone",
         },
         {
           name: "Cars",
-          category: 'car',
+          category: "car",
         },
         {
           name: "Computer",
-          category: 'laptop',
+          category: "laptop",
         },
       ],
     };
@@ -57,6 +57,12 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding: 8px;
+  @media screen and (max-width: 960px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   // categories__btn
   &__btn {

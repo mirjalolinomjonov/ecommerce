@@ -1,20 +1,17 @@
-
 <template>
   <section class="wrapper">
-    <nav class="container">
-      <ul class="bread-crumbs">
-        <li>
-          <router-link to="/"> Asosiy </router-link>
-        </li>
-        <li v-for="(item, index) in navs" :key="index">
-          <span v-if="index + 1 === navs.length"> {{ item.title }}</span>
-          <router-link v-else :to="item.url">
-            {{ item.title }}
-          </router-link>
-          <span v-if="index != navs.length - 1"></span>
-        </li>
-      </ul>
-    </nav>
+    <ul class="bread-crumbs">
+      <li>
+        <router-link to="/"> Asosiy </router-link>
+      </li>
+      <li v-for="(item, index) in navs" :key="index">
+        <span v-if="index + 1 === navs.length"> {{ item.title }}</span>
+        <router-link v-else :to="item.url">
+          {{ item.title }}
+        </router-link>
+        <span v-if="index != navs.length - 1">{{ item.title }}</span>
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -62,7 +59,7 @@ export default {
             if (Fullpath[i] === this.filterParams[j]) {
               title = Fullpath[i];
             } else {
-              title = Fullpath[i];
+              title = Fullpath[j];
             }
           }
         } else {
@@ -83,6 +80,7 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
 @import "@/assets/styles/_vereables";
 .wrapper {
@@ -93,6 +91,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 16px;
+  text-transform: capitalize;
   li {
     a {
       font-style: normal;
@@ -102,9 +101,9 @@ export default {
       color: #fff;
       transition: color 0.2s ease-in-out;
       position: relative;
-      margin-right: 16px;
+      margin-right: 2px;
       &:hover {
-        color: #305ab6;
+        text-shadow: 0 0 5px #fff;
       }
       &::after {
         content: "•";
@@ -121,7 +120,7 @@ export default {
       font-weight: 600;
       font-size: 15px;
       line-height: 18px;
-      color: #5b729380;
+      color: #f1f5f9;
     }
   }
 }

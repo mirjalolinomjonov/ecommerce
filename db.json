@@ -15,6 +15,7 @@
       "category": "phone",
       "name": "iphone 14",
       "price": 1400,
+      "discount": 30,
       "reminder": 40
     },
     {
@@ -22,6 +23,7 @@
       "category": "phone",
       "name": "iphone 11",
       "price": 450,
+      "discount": 12,
       "reminder": 15
     },
     {
@@ -29,6 +31,7 @@
       "category": "phone",
       "name": "iphone X",
       "price": 350,
+      "discount": 5,
       "reminder": 3
     },
     {
@@ -36,32 +39,17 @@
       "category": "car",
       "name": "oq fara amerika",
       "price": 250,
-      "reminder": 100
+      "discount": 0,
+      "reminder": 140
     },
     {
       "id": 5,
       "category": "car",
       "name": "oq fara speral",
       "price": 200,
+      "discount": 4,
       "reminder": 0
     }
   ],
-  "basket": [
-    {
-      "name": "iphone X",
-      "category": "phone",
-      "price": 350,
-      "reminder": 3,
-      "count": 5,
-      "id": 1
-    },
-    {
-      "name": "oq fara amerika",
-      "category": "car",
-      "price": 250,
-      "reminder": 100,
-      "count": 2,
-      "id": 2
-    }
-  ]
+  "basket": []
 }

@@ -20,6 +20,7 @@ export default {
     name: String,
     category: String,
     price: Number,
+    discount: Number,
     reminder: String,
   },
   data() {
@@ -42,11 +43,11 @@ export default {
     formatNum,
     addToBasket() {
       this.$store.commit("CHECK_IS_PRODUCT_IN_BASKET", this.name);
-      // this.$store.dispatch('fetchProductFromBasket')
       this.$store.dispatch("setProductToBasket", {
         name: this.name,
         category: this.category,
         price: this.price,
+        discount: this.discount,
         reminder: this.reminder,
         count: 1,
       });

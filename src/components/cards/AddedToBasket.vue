@@ -3,16 +3,17 @@
     <div class="product-info">
       <span class="product-info__item">{{ name }}</span>
       <span class="product-info__item">1</span>
-      <span class="product-info__item">${{ price }}</span>
-      <span class="product-info__item">${{ sum }}</span>
+      <span class="product-info__item">${{ price * count }}</span>
+      <span class="product-info__item">${{ sum * count }}</span>
     </div>
 
     <div class="product__parameters">
       <button
-        class="product__button"
-        :class="item.color"
         v-for="(item, index) in productButton"
         :key="index"
+        @click="onHandler(index)"
+        class="product__button"
+        :class="item.color"
       >
         <i :class="item.icon"></i>
       </button>
@@ -47,8 +48,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   props: {
     index: Number,
@@ -56,11 +55,12 @@ export default {
     category: String,
     name: String,
     price: Number,
-    sum: Number,
+    discount: Number,
     reminder: Number,
     count: Number,
   },
   emits: ["productPlus", "productNegative"],
+
   data() {
     return {
       productButton: [
@@ -80,11 +80,21 @@ export default {
     };
   },
 
+  computed: {
+    sum() {
+      return this.price - this.discount;
+    },
+  },
   methods: {
     removeProduct(index) {
       this.$store.commit("REMOVE_PRODUCT_FROM_BASKET", index);
       this.$store.dispatch("removeProductFromBasket", this.id);
       this.$store.state.oneProduct = {};
+    },
+    onHandler(index) {
+      if (index === 1) {
+        this.$emit("openDiscountModal");
+      }
     },
   },
 };
